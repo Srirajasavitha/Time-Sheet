@@ -1,116 +1,137 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #ffffff, #1d2a44); 
+    background: linear-gradient(to bottom, #a3d8f4, #87ceeb); /* Sky blue gradient */
     margin: 0;
     padding: 0;
-    color: #333333; 
-    height: 100vh;
+    color: #042a4b; /* Deep blue for text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.left-section {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.left-section img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 h1 {
     text-align: center;
-    color: #1d2a44; 
-    text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.3);
+    color: #005b96; /* Deep sky blue */
     font-size: 2.5em;
+    margin-bottom: 20px;
 }
 
 form {
-    background: rgba(255, 255, 255, 0.9); 
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Light translucent background */
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: auto;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 label {
     font-size: 1.1em;
-    color: #1d2a44;
+    color: #005b96; /* Deep sky blue */
     font-weight: bold;
     display: block;
     margin-bottom: 10px;
 }
 
 input[type="text"], input[type="password"] {
-    width: 93%;
+    width: 94%;
     padding: 10px;
-    margin: 5px 0 15px;
-    border: none;
+    margin-bottom: 20px;
+    border: 1px solid #87ceeb; /* Soft blue border */
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.05); 
-    color: #333333; 
+    background-color: #d9f1fc; /* Very light blue background */
+    color: #042a4b; /* Dark blue text */
     font-size: 1em;
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 input::placeholder {
-    color: #a9a9a9;
+    color: #005b96; /* Soft sky blue for placeholder */
     font-style: italic;
 }
 
 button {
-    background: #1d2a44; /* Dark Blue background for buttons */
-    color: #ffffff; 
-    border: none;
-    padding: 10px 15px;
     font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #5dade2; /* Button in vibrant sky blue */
+    color: #ffffff;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-    background: #3e4c71; /* Lighter Dark Blue on hover */
-    transform: translateY(-2px);
+    background-color: #3498db; /* Slightly darker on hover */
+    transform: scale(1.05);
 }
 
 button:active {
-    background: #2f3e63; /* Darker Blue on active */
-    transform: translateY(2px);
+    transform: scale(0.98);
 }
 
-div p {
-    background: rgba(0, 0, 0, 0.1); /* Slightly darker background for results */
-    padding: 10px;
-    border-radius: 5px;
-    color: #1d2a44; /* Dark Blue text for results */
-    font-size: 1em;
-    word-wrap: break-word;
-    text-align: left;
-}
+/* Media query for mobile view */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
 
-strong {
-    color: #ffa500; /* Highlighted text color */
-}
+    .left-section img {
+        display: none;
+    }
 
-@media (max-width: 480px) {
+    .company-name {
+        display: none; /* Hide company name on mobile */
+    }
+
     form {
-        width: 90%;
+        width: 82%;
     }
 
     h1 {
         font-size: 2em;
     }
-
-    button {
-        width: 100%;
-        font-size: 0.9em;
-    }
 }
 
-.timesheet-container {
-    position: relative;
-}
-
-.logo {
-    position: absolute;
-    bottom: 511px;
-    left: 750px;
-    width: 100px;  
-    height: auto;
+.company-name {
+    font-size: 3em; /* Increased size */
+    font-weight: bold;
+    color: #005b96; /* Vibrant sky blue */
+    text-align: center;
+    margin: 0;
 }

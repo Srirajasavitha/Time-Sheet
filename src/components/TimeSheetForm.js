@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './TimeSheetForm.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Timesheet = () => {
     const [userIdInput, setUserIdInput] = useState('');
@@ -9,7 +10,8 @@ const Timesheet = () => {
     const [asciiPassword, setAsciiPassword] = useState('');
     const [processedResult, setProcessedResult] = useState('');
     const [showAscii, setShowAscii] = useState(false);
-    const [randomNumber, setRandomNumber] = useState(null); 
+    const [randomNumber, setRandomNumber] = useState(6); 
+    const navigate = useNavigate(); 
 
     const convertToAscii = (input) => {
         return input.split('').map((char) => char.charCodeAt(0)).join(' ');
@@ -27,24 +29,8 @@ const Timesheet = () => {
         return processed.trim(); 
     };
 
-    axios.get('https://api.example.com')
-        .then((response) => {
-            setUserIdInput(response.data.userIdInput);
-        })
-        .catch((error) => {
-            console.error('There was an error fetching the userid:', error);
-        });
-
-    axios.get('https://api.example.com')
-        .then((response) => {
-            setUserPasswordInput(response.data.userPasswordInput);
-        })
-        .catch((error) => {
-            console.error('There was an error fetching the password:', error);
-        });
-
     useEffect(() => {
-        axios.get('https://api.example.com')
+        axios.get('https://6e00-2401-4900-6271-fd23-99d6-95eb-19a0-7898.ngrok-free.app/api/tasks/generate-random')
             .then((response) => {
                 setRandomNumber(response.data.randomNumber);
             })
@@ -72,7 +58,7 @@ const Timesheet = () => {
         setAsciiPassword(convertToAscii(userPasswordInput));
         setProcessedResult(finalProcessedResult);
         setShowAscii(true);
-        axios.post('https://api.example.com/processed-result', { processedResult: finalProcessedResult })
+        axios.post('https://6e00-2401-4900-6271-fd23-99d6-95eb-19a0-7898.ngrok-free.app/api/tasks', { processedResult: finalProcessedResult })
             .then((response) => {
                 if (response.data && response.data.processedResult) {
                     setProcessedResult(response.data.processedResult);
@@ -83,50 +69,35 @@ const Timesheet = () => {
             .catch((error) => {
                 console.error('There was an error posting the processed result:', error);
             });
+            navigate('/dashboard');
     };
-
-    const handleUserIdChange = (event) => {
-        setUserIdInput(event.target.value);
-    };
-
-    const handleUserPasswordChange = (event) => {
-        setUserPasswordInput(event.target.value);
-    };
-
     return (
-        <div className="timesheet-container">
-            <img 
-                src="https://raisonautomation.com/wp-content/uploads/2024/08/RAISON_LOGO_-_2K24.png" 
-                alt="RAISON Automation Logo" 
-                className="logo" 
-            />
-            <h1>Timesheet</h1>
-            <form>
-                <label>
-                    User ID:
-                    <input 
-                        type="text" 
-                        value={userIdInput} 
-                        onChange={handleUserIdChange} 
-                        placeholder="Enter User ID" 
+        <div className="container">
+            <div className="left-section">
+                <h1 className="company-name">RAISON AUTOMATION</h1>
+            </div>
+            <div className="right-section">
+                <h1>Welcome Back!</h1>
+                <form onSubmit={handleShowAscii}>
+                    <label htmlFor="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        value={userIdInput}
+                        onChange={(e) => setUserIdInput(e.target.value)}
+                        placeholder="Enter your username"
                     />
-                </label>
-                <br /><br />
-                <label>
-                    Password:
-                    <input 
-                        type="password" 
-                        value={userPasswordInput} 
-                        onChange={handleUserPasswordChange} 
-                        placeholder="Enter Password" 
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={userPasswordInput}
+                        onChange={(e) => setUserPasswordInput(e.target.value)}
+                        placeholder="Enter your password"
                     />
-                </label>
-                <br /><br />
-                <button type="button" onClick={handleShowAscii}>
-                    Submit
-                </button>
-            </form>
-            {showAscii && (
+                    <button type="submit">Log In</button>
+                </form>
+                {showAscii && (
                 <div>
                     <p><strong>ASCII values:</strong></p>
                     <p>User ID: {asciiUserId}</p>
@@ -134,6 +105,7 @@ const Timesheet = () => {
                     <p><strong>Processed Results:</strong> {processedResult}</p>
                 </div>
             )}
+            </div>
         </div>
     );
 };

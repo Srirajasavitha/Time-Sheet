@@ -1,13 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TimeSheetForm from './components/TimeSheetForm';
-// import TimeSheetSelection from './components/TimeSheetSelection';
+import TimeSheetDashboard from './components/TimeSheetDashboard';
+// import TimeSheetProfile from './components/TimeSheetProfile';
 
 function App() {
   return (
-    <div>
-      <TimeSheetForm />
-      {/* <TimeSheetSelection /> */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<TimeSheetForm />} />
+        <Route path="/dashboard" element={<TimeSheetDashboard />} />
+        {/* <Route path="/profile" element={<TimeSheetProfile />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
